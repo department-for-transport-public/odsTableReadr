@@ -28,7 +28,7 @@ extract_table_ranges <- function(x) {
     xml2::xml_find_all("//table:database-range")
 
   ##Extract names, sheets and ranges into a dataframe
-  data.frame(
+  table_details <- data.frame(
     "table_name" = xml2::xml_attr(all_tables, "name"),
     "table_address" = xml2::xml_attr(all_tables, "target-range-address")
   ) %>%
@@ -52,4 +52,6 @@ extract_table_ranges <- function(x) {
 
   #Remove content file
   unlink(file.path(tmp, "content.xml"))
+
+  return(table_details)
 }
