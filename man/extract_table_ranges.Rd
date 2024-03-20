@@ -15,5 +15,5 @@ A dataframe with three columns: table_name, sheet_name, and cell_range.
         the names of the sheets, and cell_range contains the cell ranges of the tables.
 }
 \description{
-Extracts table spans from an ODS file.
+Extracts table metadata from an ODS file, with table and sheet name, and cell range span.
 }

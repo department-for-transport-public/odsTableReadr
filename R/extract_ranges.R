@@ -12,6 +12,7 @@
 #' @importFrom xml2 read_xml xml_find_all xml_attr
 #' @importFrom dplyr filter mutate select
 #' @importFrom tidyr separate pivot_longer pivot_wider
+#' @importFrom utils unzip
 #' @importFrom magrittr "%>%"
 #'
 #' @export
@@ -21,7 +22,7 @@ extract_table_ranges <- function(x) {
   tmp <- tempdir()
 
   ##Unzip into temp folder
-  unzip(x, exdir = tmp, files = "content.xml")
+  utils::unzip(x, exdir = tmp, files = "content.xml")
 
   ##Find all tables
   all_tables <- xml2::read_xml(file.path(tmp, "content.xml")) %>%

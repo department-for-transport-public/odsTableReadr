@@ -5,7 +5,7 @@ Version: 0.1.0
 Authors@R: c(
     person("Francesca", "Bryden", , "francesca.bryden@dft.gov.uk", role = c("aut", "cre")))
 Description: Identifies and reads in data from marked up tables inside ODS files.
-Imports: readODS, dplyr, tidyr, xml2, purrr
+Imports: readODS, dplyr, tidyr, xml2, purrr, magrittr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
