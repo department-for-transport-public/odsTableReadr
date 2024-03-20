@@ -1,7 +1,7 @@
 
 #' Extract Table Ranges
 #'
-#' Extracts table spans from an ODS file.
+#' Extracts table metadata from an ODS file, with table and sheet name, and cell range span.
 #'
 #' @param x Path to an ODS file containing tables to be extracted.
 #'
