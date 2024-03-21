@@ -19,7 +19,7 @@ read_all_tables <- function(file, exclude_meta = TRUE){
     dplyr::group_by(sheet_name) %>%
     dplyr::mutate(count = n()) %>%
     dplyr::mutate(display_name = dplyr::case_when(count == 1 ~ sheet_name,
-                                          TRUE ~ table_name))
+                                          TRUE ~ paste(sheet_name, table_name, sep = "_")))
 
   ##Exclude metadata if we need to
   if(exclude_meta){
