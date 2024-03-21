@@ -5,15 +5,21 @@
 #'
 #' @return A list of dataframes, each representing a table from the ODS file.
 #'
-#' @importFrom dplyr filter
+#' @importFrom dplyr filter group_by mutate case_when
 #' @importFrom purrr map
+#' @importFrom magrittr "%>%"
 #'
 #' @export
 
 read_all_tables <- function(file, exclude_meta = TRUE){
 
   ##Return list of tables in sheet
-  tbl_range <- extract_table_ranges(file)
+  tbl_range <- extract_table_ranges(file) %>%
+    ##Set name of final table: use sheet name unless duplicated
+    dplyr::group_by(sheet_name) %>%
+    dplyr::mutate(count = n()) %>%
+    dplyr::mutate(display_name = dplyr::case_when(count == 1 ~ sheet_name,
+                                          TRUE ~ table_name))
 
   ##Exclude metadata if we need to
   if(exclude_meta){
@@ -31,7 +37,7 @@ read_all_tables <- function(file, exclude_meta = TRUE){
 
   ##Turn table range into a named vector
   tbl_names <- tbl_range$table_name
-  names(tbl_names) <- tbl_range$table_name
+  names(tbl_names) <- tbl_range$display_name
 
   ##Read in all the tables. Nice.
   purrr::map(.x = tbl_names,
