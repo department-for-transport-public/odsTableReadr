@@ -30,6 +30,7 @@ read_ods_table <- function(file, tbl_name){
   ##Read in the file and table
   readODS::read_ods(path = file,
                     sheet = chosen_tbl$sheet_name,
-                    range = chosen_tbl$cell_range)
+                    range = chosen_tbl$cell_range,
+                    na = c("[x]", "..", "[z]"))
 
 }

@@ -1,7 +1,7 @@
 Package: odsTableReadr
 Type: Package
 Title: Read In Data From Open Document Spreadsheet (ODS) Tables
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
     person("Francesca", "Bryden", , "francesca.bryden@dft.gov.uk", role = c("aut", "cre")))
 Description: Identifies and reads in data from marked up tables inside ODS files.
