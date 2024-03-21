@@ -32,7 +32,15 @@ extract_table_ranges <- function(x) {
   table_details <- data.frame(
     "table_name" = xml2::xml_attr(all_tables, "name"),
     "table_address" = xml2::xml_attr(all_tables, "target-range-address")
-  ) %>%
+  )
+
+  ##Skip processing if there are no tables in the sheet
+  if(nrow(table_details) == 0){
+    table_details <- NULL
+    warning("No tables found in this workbook")
+  } else{
+
+    table_details <- table_details %>%
     ##Drop any pseudo tables
     dplyr::filter(!grepl("^__", table_name)) %>%
     ##Split table sheets and cell addresses
@@ -50,6 +58,7 @@ extract_table_ranges <- function(x) {
     dplyr::select(table_name, sheet_name, cell_range) %>%
     ##Scrub any quotation marks from sheet name
     dplyr::mutate(sheet_name = gsub("\\'", "", sheet_name))
+  }
 
   #Remove content file
   unlink(file.path(tmp, "content.xml"))

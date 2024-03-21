@@ -13,8 +13,14 @@
 
 read_all_tables <- function(file, exclude_meta = TRUE){
 
+  tbl_range <- extract_table_ranges(file)
+
+  if(is.null(tbl_range)){
+    stop("File ", file, " contains no marked up tables. Consider using read_ods function from the readODS package instead")
+  }
+
   ##Return list of tables in sheet
-  tbl_range <- extract_table_ranges(file) %>%
+  tbl_range <- tbl_range %>%
     ##Set name of final table: use sheet name unless duplicated
     dplyr::group_by(sheet_name) %>%
     dplyr::mutate(count = n()) %>%

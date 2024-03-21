@@ -15,7 +15,7 @@ read_ods_table <- function(file, tbl_name){
   ##Return list of tables in sheet
   tbl_range <- extract_table_ranges(file)
 
-  if(nrow(tbl_range) == 0){
+  if(is.null(tbl_range)){
     stop("File ", file, " contains no marked up tables. Consider using read_ods function from the readODS package instead")
   }
 
