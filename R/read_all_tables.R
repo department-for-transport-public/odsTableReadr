@@ -13,7 +13,9 @@
 
 read_all_tables <- function(file, exclude_meta = TRUE){
 
-  tbl_range <- extract_table_ranges(file)
+  tbl_range <- extract_table_ranges(file) %>%
+    ##Drop any where table name is NA
+    dplyr::filter(!is.na(table_name))
 
   if(is.null(tbl_range)){
     stop("File ", file, " contains no marked up tables. Consider using read_ods function from the readODS package instead")
