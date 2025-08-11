@@ -34,7 +34,8 @@ read_all_tables <- function(file, exclude_meta = TRUE){
 
     tbl_range_dropped <- tbl_range %>%
     ##Drop common metadata sheet names
-    dplyr::filter(!grepl("content|note|cover|file", sheet_name, ignore.case = TRUE))
+    dplyr::filter(!grepl("content|note|cover|file|definition", 
+                         sheet_name, ignore.case = TRUE))
 
     message(nrow(tbl_range) - nrow(tbl_range_dropped),
             " metadata tables excluded from read")
